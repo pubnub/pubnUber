@@ -1,103 +1,70 @@
+
 <!DOCTYPE html>
-<!--
-    Licensed to the Apache Software Foundation (ASF) under one
-    or more contributor license agreements.  See the NOTICE file
-    distributed with this work for additional information
-    regarding copyright ownership.  The ASF licenses this file
-    to you under the Apache License, Version 2.0 (the
-    "License"); you may not use this file except in compliance
-    with the License.  You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing,
-    software distributed under the License is distributed on an
-    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-     KIND, either express or implied.  See the License for the
-    specific language governing permissions and limitations
-    under the License.
--->
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="format-detection" content="telephone=no" />
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-        <link rel="stylesheet" type="text/css" href="css/index.css" />
-        <title>Hello World</title>
-        <script type="text/javascript" src="http://pubnub.github.io/eon/lib/eon.js"></script>
-        <link type="text/css" rel="stylesheet" href="http://pubnub.github.io/eon/lib/eon.css" />
-    </head>
-    <body>
-        <p id="myDiv"></p>
-        <div class="app" id="map" style="height: 500px;">
-        </div>
-        <script type="text/javascript" src="phonegap.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-        <script>
-              function getNonZeroRandomNumber(){
-                var random = Math.floor(Math.random()*199) - 99;
-                if(random==0) return getNonZeroRandomNumber();
-                console.log('ran')
-                return random;
-              }
-            </script>
-            <script>
+  <head>
+    <meta charset=utf-8 />
+    <title>Rutgers Live Bus Locations</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        position:absolute;
+        top:0;
+        bottom:0;
+        width:100%;
+      }
+    </style>
 
-            document.addEventListener("deviceready", onDeviceReady, false);
+    <script type="text/javascript" src="http://pubnub.github.io/eon/lib/eon.js"></script>
+    <link type="text/css" rel="stylesheet" href="http://pubnub.github.io/eon/lib/eon.css" />
 
-            function onDeviceReady() {
-                var channel = 'pubnub-mapbox-' + getNonZeroRandomNumber();
+  </head>
+  <body>
+    <div id='map'></div>
+    <script>
+      L.RotatedMarker = L.Marker.extend({
+        options: { angle: 0 },
+        _setPos: function(pos) {
+          L.Marker.prototype._setPos.call(this, pos);
+          if (L.DomUtil.TRANSFORM) {
+            // use the CSS transform rule if available
+            this._icon.style[L.DomUtil.TRANSFORM] += ' rotate(' + this.options.angle + 'deg)';
+          } else if (L.Browser.ie) {
+            // fallback for IE6, IE7, IE8
+            var rad = this.options.angle * L.LatLng.DEG_TO_RAD,
+            costheta = Math.cos(rad),
+            sintheta = Math.sin(rad);
+            this._icon.style.filter += ' progid:DXImageTransform.Microsoft.Matrix(sizingMethod=\'auto expand\', M11=' +
+              costheta + ', M12=' + (-sintheta) + ', M21=' + sintheta + ', M22=' + costheta + ')';
+          }
+        }
+      });
 
-                var map = eon.map({
-                  id: 'map',
-                  mb_id: 'ianjennings.l896mh2e',
-                  mb_token: 'pk.eyJ1IjoiaWFuamVubmluZ3MiLCJhIjoiZExwb0p5WSJ9.XLi48h-NOyJOCJuu1-h-Jg',
-                  subscribe_key: 'demo',
-                  channel: channel,
-                  connect: connect,
-                  message: function (data) {
-                    map.setView(data[0].latlng, 13);
-                  }
-                });
+      var map = eon.map({
+        id: 'map',
+        mb_id: 'ianjennings.lec77m70',
+        mb_token: 'pk.eyJ1IjoiaWFuamVubmluZ3MiLCJhIjoiZExwb0p5WSJ9.XLi48h-NOyJOCJuu1-h-Jg',
+        channel: 'rutgers-bus-data',
+        rotate: true,
+        history: true,
+        marker: function (latlng, data) {
 
-                function connect() {
+          var marker = new L.RotatedMarker(latlng, {
+            icon: L.icon({
+              iconUrl: 'http://i.imgur.com/yY2XvdH.png',
+              iconSize: [15, 31]
+            })
+          });
 
-                  var pn = PUBNUB.init({
-                    publish_key: 'demo'
-                  });
+          marker.bindPopup('Route ' + data.routeTag.toUpperCase());
 
-                  var element = document.getElementById('myDiv');
-                  function onSuccess(position) {
+          return marker;
 
-                      console.log(position)
-
-                    pn.publish({
-                      channel: channel,
-                      message: [
-                        {
-                          latlng: [position.coords.latitude, position.coords.longitude]
-                        }
-                      ]
-                    });
-
-                  }
-
-                  // onError Callback receives a PositionError object
-                  //
-                  function onError(error) {
-                      alert('code: '    + error.code    + '\n' +
-                            'message: ' + error.message + '\n');
-                  }
-
-                  // Options: throw an error if no update is received every 30 seconds.
-                  //
-                  var watchID = navigator.geolocation.watchPosition(onSuccess, onError, { timeout: 30000 });
-
-
-                };
-
-            }
-
-            </script>
-    </body>
+        }
+      });
+    </script>
+  </body>
 </html>
