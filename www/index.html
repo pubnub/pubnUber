@@ -43,6 +43,10 @@
         }
       });
 
+      var hail = function(argument) {
+        alert('Your ride is on it\'s way');
+      }
+
       var map = eon.map({
         id: 'map',
         mb_id: 'ianjennings.lec77m70',
@@ -59,7 +63,7 @@
             })
           });
 
-          marker.bindPopup('Route ' + data.routeTag.toUpperCase());
+          marker.bindPopup('<a href="#" onClick="hail()">Hail Cab</a>');
 
           return marker;
 
