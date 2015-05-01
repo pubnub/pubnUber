@@ -1,3 +1,2 @@
-# pubnUber
+# Clone Uber with PubNub and EON C3
 
-PubNub uber clone
