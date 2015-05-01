@@ -1,2 +1,1 @@
-# Clone Uber with PubNub and EON C3
-
+# Build an Uber clone with Phonegap and PubNub
