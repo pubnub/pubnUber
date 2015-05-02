@@ -1,0 +1,133 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset=utf-8 />
+    <title>Taxi! Taxi!</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Open Sans', sans-serif;
+      }
+      #map {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 90%;
+      }
+      #hail {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 10%;
+        width: 100%;
+        background-color: #111;
+        color: #efefef;
+        display: block;
+        font-size: 18px;
+        text-transform: uppercase;
+      }
+      #hail span {
+        position: absolute;
+        text-align: center;
+        display: block;
+        width: 100%;
+        top: 50%;
+        margin-top: -10px;
+      }
+      #hail:hover {
+        background-color: #444;
+        color: #fff;
+      }
+      #hail:active {
+        background-color: #000;
+      }
+    </style>
+
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+
+    <script type="text/javascript" src="http://pubnub.github.io/eon/lib/eon.js"></script>
+    <link type="text/css" rel="stylesheet" href="http://pubnub.github.io/eon/lib/eon.css" />
+
+    <script src="http://cdn.pubnub.com/pubnub-3.7.1.min.js"></script>
+
+  </head>
+  <body>
+    <div id='map'></div>
+    <a id="hail" href="#" onclick="hail()"><span>Get a Ride</span></a>
+    <script>
+
+      var channel = "pubnub-taxi-app";
+      var pubnub = PUBNUB.init({
+        publish_key   : 'demo',
+        subscribe_key : 'demo'
+      });
+
+      L.RotatedMarker = L.Marker.extend({
+        options: { angle: 0 },
+        _setPos: function(pos) {
+          L.Marker.prototype._setPos.call(this, pos);
+          if (L.DomUtil.TRANSFORM) {
+            // use the CSS transform rule if available
+            this._icon.style[L.DomUtil.TRANSFORM] += ' rotate(' + this.options.angle + 'deg)';
+          } else if (L.Browser.ie) {
+            // fallback for IE6, IE7, IE8
+            var rad = this.options.angle * L.LatLng.DEG_TO_RAD,
+            costheta = Math.cos(rad),
+            sintheta = Math.sin(rad);
+            this._icon.style.filter += ' progid:DXImageTransform.Microsoft.Matrix(sizingMethod=\'auto expand\', M11=' +
+              costheta + ', M12=' + (-sintheta) + ', M21=' + sintheta + ', M22=' + costheta + ')';
+          }
+        }
+      });
+
+      pubnub.subscribe({
+        channel: channel,
+        message : function(message,env,channel){
+          if(message == 'pickup') {
+            alert('A driver is on their way!');
+          }
+        }
+      });
+
+      var hail = function(argument) {
+
+        pubnub.publish({
+          channel: channel,
+          message: 'hail'
+        });
+
+        alert('Waiting for driver...');
+
+      };
+
+      var map = eon.map({
+        id: 'map',
+        mb_id: 'ianjennings.lec77m70',
+        mb_token: 'pk.eyJ1IjoiaWFuamVubmluZ3MiLCJhIjoiZExwb0p5WSJ9.XLi48h-NOyJOCJuu1-h-Jg',
+        channel: 'rutgers-bus-data',
+        rotate: true,
+        history: true,
+        pubnub: pubnub,
+        marker: function (latlng, data) {
+
+          var marker = new L.RotatedMarker(latlng, {
+            icon: L.icon({
+              iconUrl: 'http://i.imgur.com/yY2XvdH.png',
+              iconSize: [15, 31]
+            })
+          });
+
+          marker.bindPopup('<a href="#" onClick="hail()">Hail this driver.</a>');
+
+          return marker;
+
+        }
+      });
+
+    </script>
+  </body>
+</html>
