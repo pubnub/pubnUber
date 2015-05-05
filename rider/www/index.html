@@ -52,8 +52,6 @@
     <script type="text/javascript" src="http://pubnub.github.io/eon/lib/eon.js"></script>
     <link type="text/css" rel="stylesheet" href="http://pubnub.github.io/eon/lib/eon.css" />
 
-    <script src="http://cdn.pubnub.com/pubnub-3.7.1.min.js"></script>
-
   </head>
   <body>
     <div id='map'></div>
@@ -87,9 +85,11 @@
       pubnub.subscribe({
         channel: channel,
         message : function(message,env,channel){
+
           if(message == 'pickup') {
             alert('A driver is on their way!');
           }
+
         }
       });
 
