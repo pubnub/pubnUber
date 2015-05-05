@@ -1,3 +1,0 @@
-# pubnUber
-
-PubNub uber clone
