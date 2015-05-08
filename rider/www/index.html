@@ -3,7 +3,8 @@
 <html>
   <head>
     <meta charset=utf-8 />
-    <title>Taxi! Taxi!</title>
+    <title>Driver - Taxi! Taxi!</title>
+    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
     <style>
       body {
@@ -45,15 +46,58 @@
       #hail:active {
         background-color: #000;
       }
+
+      #popup {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: #fff;
+        z-index: 9999;
+        display: none;
+      }
+      #popup .text-wrap {
+        display: block;
+        top: 50%;
+        height: 32px;
+        line-height: 32px;
+        font-size: 32px;
+        color: #000;
+        position: absolute;
+        text-align: center;
+        width: 100%;
+      }
+      .button {
+        border: 1px solid #111;
+        border-radius: 3px;
+        display: block;
+        margin: 42px auto;
+        line-height: 42px;
+        height: 42px;
+        opacity: .8;
+        width: 120px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+      .button:hover {
+        opacity: 1;
+      }
     </style>
 
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script type="text/javascript" src="http://pubnub.github.io/eon/lib/eon.js"></script>
     <link type="text/css" rel="stylesheet" href="http://pubnub.github.io/eon/lib/eon.css" />
 
   </head>
   <body>
+    <div id="popup">
+      <div class="text-wrap">
+        <p class="text">You're ride is on it's way!</p>
+        <div class="button" onclick="closeAlert()">OK</div>
+      </div>
+    </div>
     <div id='map'></div>
     <a id="hail" href="#" onclick="hail()"><span>Get a Ride</span></a>
     <script>
@@ -63,6 +107,26 @@
         publish_key   : 'demo',
         subscribe_key : 'demo'
       });
+
+      var openAlert = function(text) {
+        $('.text').text(text);
+        $('#popup').show();
+      }
+
+      var closeAlert = function(text) {
+        $('#popup').hide();
+      }
+
+      var hail = function(argument) {
+
+        pubnub.publish({
+          channel: channel,
+          message: 'hail'
+        });
+
+        openAlert('Waiting for driver...');
+
+      };
 
       L.RotatedMarker = L.Marker.extend({
         options: { angle: 0 },
@@ -87,22 +151,11 @@
         message : function(message,env,channel){
 
           if(message == 'pickup') {
-            alert('A driver is on their way!');
+            openAlert('A driver is on their way!');
           }
 
         }
       });
-
-      var hail = function(argument) {
-
-        pubnub.publish({
-          channel: channel,
-          message: 'hail'
-        });
-
-        alert('Waiting for driver...');
-
-      };
 
       var map = eon.map({
         id: 'map',
