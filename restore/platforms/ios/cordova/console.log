@@ -1,0 +1,25 @@
+2015-05-01 17:31:06.992 HelloWorld[5095:60664] DiskCookieStorage changing policy from 2 to 0, cookie file: file:///Users/Jennings/Library/Developer/CoreSimulator/Devices/07840738-5096-49AC-A270-CBE32D68969E/data/Containers/Data/Application/96FFD1AF-EA58-4C44-AEC3-D3E3AF494F62/Library/Cookies/Cookies.binarycookies
+2015-05-01 17:31:07.056 HelloWorld[5095:60664] Multi-tasking -> Device: YES, App: YES
+2015-05-01 17:31:07.892 HelloWorld[5095:60664] Resetting plugins due to page load.
+2015-05-01 17:31:07.934 HelloWorld[5095:60730] ERROR whitelist rejection: url='http://pubnub.github.io/eon/lib/eon.js'
+2015-05-01 17:31:07.937 HelloWorld[5095:60730] ERROR whitelist rejection: url='http://pubnub.github.io/eon/lib/eon.css'
+2015-05-01 17:31:07.963 HelloWorld[5095:60664] Finished load of: file:///Users/Jennings/Library/Developer/CoreSimulator/Devices/07840738-5096-49AC-A270-CBE32D68969E/data/Containers/Bundle/Application/1300EB16-1453-41C6-8056-92DA44BF3735/HelloWorld.app/www/index.html
+2015-05-01 17:33:48.019 HelloWorld[5552:64028] DiskCookieStorage changing policy from 2 to 0, cookie file: file:///Users/Jennings/Library/Developer/CoreSimulator/Devices/07840738-5096-49AC-A270-CBE32D68969E/data/Containers/Data/Application/E2E9755B-0521-47EC-B68C-28D2ED78FF7E/Library/Cookies/Cookies.binarycookies
+2015-05-01 17:33:48.159 HelloWorld[5552:64028] Multi-tasking -> Device: YES, App: YES
+2015-05-01 17:33:48.293 HelloWorld[5552:64028] Resetting plugins due to page load.
+2015-05-01 17:33:48.324 HelloWorld[5552:64061] ERROR whitelist rejection: url='http://pubnub.github.io/eon/lib/eon.js'
+2015-05-01 17:33:48.325 HelloWorld[5552:64061] ERROR whitelist rejection: url='http://pubnub.github.io/eon/lib/eon.css'
+2015-05-01 17:33:48.331 HelloWorld[5552:64028] Finished load of: file:///Users/Jennings/Library/Developer/CoreSimulator/Devices/07840738-5096-49AC-A270-CBE32D68969E/data/Containers/Bundle/Application/644B2C53-0C44-4970-894B-36BCB3AF8D15/HelloWorld.app/www/index.html
+2015-05-01 17:36:05.296 HelloWorld[5930:66793] DiskCookieStorage changing policy from 2 to 0, cookie file: file:///Users/Jennings/Library/Developer/CoreSimulator/Devices/07840738-5096-49AC-A270-CBE32D68969E/data/Containers/Data/Application/F87E3B52-417C-4DD1-AEEB-07D729BCB896/Library/Cookies/Cookies.binarycookies
+2015-05-01 17:36:05.368 HelloWorld[5930:66793] Multi-tasking -> Device: YES, App: YES
+2015-05-01 17:36:05.495 HelloWorld[5930:66793] Resetting plugins due to page load.
+2015-05-01 17:36:06.402 HelloWorld[5930:66793] Finished load of: file:///Users/Jennings/Library/Developer/CoreSimulator/Devices/07840738-5096-49AC-A270-CBE32D68969E/data/Containers/Bundle/Application/18A48025-668D-4111-B060-8944A969085B/HelloWorld.app/www/index.html
+2015-05-01 17:47:18.013 HelloWorld[7074:74446] Multi-tasking -> Device: YES, App: YES
+2015-05-01 17:47:18.253 HelloWorld[7074:74446] Resetting plugins due to page load.
+2015-05-01 17:47:19.112 HelloWorld[7074:74446] Finished load of: file:///Users/Jennings/Library/Developer/CoreSimulator/Devices/07840738-5096-49AC-A270-CBE32D68969E/data/Containers/Bundle/Application/EDF68F87-A446-4F9D-AFDC-A174F61928D4/HelloWorld.app/www/index.html
+2015-05-04 19:33:15.135 HelloWorld[46954:8537774] Multi-tasking -> Device: YES, App: YES
+2015-05-04 19:33:15.326 HelloWorld[46954:8537774] Resetting plugins due to page load.
+2015-05-04 19:33:16.031 HelloWorld[46954:8537774] Finished load of: file:///Users/Jennings/Library/Developer/CoreSimulator/Devices/07840738-5096-49AC-A270-CBE32D68969E/data/Containers/Bundle/Application/79106E41-921D-422C-B31F-9CC3A133139E/HelloWorld.app/www/index.html
+2015-05-07 21:55:54.389 HelloWorld[9539:12319219] Multi-tasking -> Device: YES, App: YES
+2015-05-07 21:55:54.637 HelloWorld[9539:12319219] Resetting plugins due to page load.
+2015-05-07 21:55:54.769 HelloWorld[9539:12319219] Finished load of: file:///Users/Jennings/Library/Developer/CoreSimulator/Devices/07840738-5096-49AC-A270-CBE32D68969E/data/Containers/Bundle/Application/77524C5A-55F3-440D-8C09-149D36AB2B37/HelloWorld.app/www/index.html

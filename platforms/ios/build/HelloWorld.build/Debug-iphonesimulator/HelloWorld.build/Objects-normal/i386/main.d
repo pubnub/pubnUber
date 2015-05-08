@@ -1,2 +1,2 @@
 dependencies: \
-  /Users/Jennings/Development/pubnub-uber/rider/platforms/ios/HelloWorld/main.m
+  /Users/Jennings/Development/pubnub-uber/restore/platforms/ios/HelloWorld/main.m
